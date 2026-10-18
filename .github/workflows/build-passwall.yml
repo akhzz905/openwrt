@@ -45,14 +45,23 @@ jobs:
           echo "CONFIG_PACKAGE_dnsmasq=n" >> .config
           echo "CONFIG_PACKAGE_dnsmasq-full=y" >> .config
 
-          # 5. 预装 PassWall 2 及其核心（Sing-Box、Xray）
+          # 5. 关键：直接指定实体核心软件包（生成 /usr/bin/xray 等内核）
+          echo "CONFIG_PACKAGE_xray-core=y" >> .config
+          echo "CONFIG_PACKAGE_sing-box=y" >> .config
+          echo "CONFIG_PACKAGE_chinadns-ng=y" >> .config
+          echo "CONFIG_PACKAGE_v2ray-geoip=y" >> .config
+          echo "CONFIG_PACKAGE_v2ray-geosite=y" >> .config
+
+          # 6. 预装 PassWall 2 界面、全核心支持及 nftables 转发
           echo "CONFIG_PACKAGE_luci-app-passwall2=y" >> .config
-          echo "CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_SingBox=y" >> .config
-          echo "CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Xray=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-passwall2_Basic_Core_All=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-passwall2_Nftables_Transparent_Proxy=y" >> .config
           echo "CONFIG_PACKAGE_luci-i18n-passwall2-zh-cn=y" >> .config
 
-          # 6. 底层内核转发依赖与 HTTPS 证书
+          # 7. 底层内核转发依赖与 HTTPS 证书
           echo "CONFIG_PACKAGE_kmod-nft-tproxy=y" >> .config
+          echo "CONFIG_PACKAGE_kmod-nft-socket=y" >> .config
+          echo "CONFIG_PACKAGE_kmod-nft-nat=y" >> .config
           echo "CONFIG_PACKAGE_ca-bundle=y" >> .config
 
           # 自动补全所有级联依赖并生成有效配置
