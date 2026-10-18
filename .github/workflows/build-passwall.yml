@@ -22,7 +22,8 @@ jobs:
       - name: Update & Install Feeds
         run: |
           ./scripts/feeds update -a
-          ./scripts/feeds install -f -p passwall_packages v2ray-geodata
+          sed -i 's/PKG_BUILD_DEPENDS:=golang\/host/PKG_BUILD_DEPENDS:=golang1.27\/host/' feeds/passwall_packages/xray-core/Makefile
+          ./scripts/feeds install -f -p passwall_packages v2ray-geodata xray-core
           ./scripts/feeds install -a
 
       - name: Generate Configuration for GL-AXT1800
