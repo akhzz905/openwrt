@@ -23,8 +23,6 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          # 编译时动态拉取最新版 luci-app-cpufreq
-          git clone --depth 1 https://github.com/openwrt-xiaomi/luci-app-cpufreq.git package/luci-app-cpufreq
 
       - name: Generate Configuration for GL-AXT1800
         run: |
@@ -65,9 +63,6 @@ jobs:
           echo "CONFIG_PACKAGE_kmod-nft-socket=y" >> .config
           echo "CONFIG_PACKAGE_kmod-nft-nat=y" >> .config
           echo "CONFIG_PACKAGE_ca-bundle=y" >> .config
-
-          # 8. 预装 ImmortalWrt 自带的 CPU 频率调节插件 (luci-app-cpufreq)
-          echo "CONFIG_PACKAGE_luci-app-cpufreq=y" >> .config
 
           # 自动补全所有级联依赖并生成有效配置
           make defconfig
