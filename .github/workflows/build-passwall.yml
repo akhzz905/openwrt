@@ -64,6 +64,9 @@ jobs:
           echo "CONFIG_PACKAGE_kmod-nft-nat=y" >> .config
           echo "CONFIG_PACKAGE_ca-bundle=y" >> .config
 
+          # 8. 预装 ImmortalWrt 自带的 CPU 频率调节插件 (luci-app-cpufreq)
+          echo "CONFIG_PACKAGE_luci-app-cpufreq=y" >> .config
+
           # 自动补全所有级联依赖并生成有效配置
           make defconfig
 
