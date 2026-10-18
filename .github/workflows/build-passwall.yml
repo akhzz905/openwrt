@@ -45,16 +45,16 @@ jobs:
           echo "CONFIG_PACKAGE_dnsmasq=n" >> .config
           echo "CONFIG_PACKAGE_dnsmasq-full=y" >> .config
 
-          # 5. 关键：直接指定实体核心软件包（生成 /usr/bin/xray 等内核）
+          # 5. 关键：仅安装 Xray-core 核心与转发规则库（不装 Sing-Box 与 Rust）
           echo "CONFIG_PACKAGE_xray-core=y" >> .config
-          echo "CONFIG_PACKAGE_sing-box=y" >> .config
           echo "CONFIG_PACKAGE_chinadns-ng=y" >> .config
           echo "CONFIG_PACKAGE_v2ray-geoip=y" >> .config
           echo "CONFIG_PACKAGE_v2ray-geosite=y" >> .config
 
-          # 6. 预装 PassWall 2 界面、全核心支持及 nftables 转发
+          # 6. 预装 PassWall 2 界面（配置为纯 Xray 核心模式）
           echo "CONFIG_PACKAGE_luci-app-passwall2=y" >> .config
-          echo "CONFIG_PACKAGE_luci-app-passwall2_Basic_Core_All=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-passwall2_Basic_Core_Xray=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client=n" >> .config
           echo "CONFIG_PACKAGE_luci-app-passwall2_Nftables_Transparent_Proxy=y" >> .config
           echo "CONFIG_PACKAGE_luci-i18n-passwall2-zh-cn=y" >> .config
 
